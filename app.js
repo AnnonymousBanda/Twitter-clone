@@ -8,6 +8,7 @@ const viewRoute = require('./routes/viewRoute.js');
 const { AppError, globalErrorHandler } = require('./utils/AppErrors.js');
 const { protect } = require('./controllers/authController.js');
 const { home } = require('./controllers/viewController.js');
+const compression = require('compression');
 require('dotenv').config({ path: path.join(__dirname, 'config.env') });
 require('./server.js');
 
@@ -17,6 +18,7 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(compression());
 app.use(cookieParser());
 
 app.use(express.json());

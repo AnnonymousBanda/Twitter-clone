@@ -5,6 +5,7 @@ const {
     signup,
     logout,
     profile,
+    connect
 } = require('./../controllers/viewController.js');
 const {
     signup: authSignup,
@@ -26,5 +27,7 @@ route.route('/login').get(login).post(authLogin);
 route.route('/logout').get(logout);
 
 route.route('/profile').get(protect, profile);
+
+route.route('/connect').get(protect, connect);
 
 module.exports = route;

@@ -12,21 +12,25 @@ html(lang="en")
     .main
         .left
             nav
-                img(src="svg/logo.svg", alt="twitter logo")
+                img.invert(src="svg/logo.svg", alt="twitter logo")
                 a(href="/")
                     img(src="svg/home.svg", alt="home") 
                     p Home 
                 a(href="/profile")
-                    img(src="svg/profile.svg", alt="profile" style="filter:invert(180);") 
+                    img.invert(src="svg/profile.svg", alt="profile") 
                     p Profile 
+                a#connect(href="/connect")
+                    img.invert(src="svg/connect.svg", alt="connect") 
+                    p Connect  
                 a(href="/api/v1/auth/logout")
-                    img(src="svg/logout.svg", alt="logout") 
+                    img.invert(src="svg/logout.svg", alt="logout") 
                     p Logout  
             a(href="/post")  
                 button Post    
             +userCard(username, name)
 
         .center 
+            img.invert.none#hamburger(src="svg/navbar.svg", alt="navbar")
             block content 
 
         .right 
@@ -38,3 +42,5 @@ html(lang="en")
             .follow-list
                 each user in followings
                     +usersListCard(username, user.username, user.name,'unfollow')
+
+        script(src="/script.js")

@@ -56,3 +56,11 @@ exports.profile = catchAsync(async (req, res, next) => {
 
     res.render('profile', data);
 });
+
+exports.connect = catchAsync(async (req, res, next) => {
+    const data = await getData(req, res);
+
+    data.title = 'Connect';
+
+    res.render('connect', data);
+});

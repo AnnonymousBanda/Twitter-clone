@@ -1,5 +1,6 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const useragent = require('express-useragent');
 const path = require('path');
 const authRoute = require('./routes/authRoute.js');
 const postRoute = require('./routes/postRoute.js');
@@ -20,6 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(compression());
 app.use(cookieParser());
+app.use(useragent.express());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

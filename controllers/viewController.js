@@ -1,4 +1,4 @@
-const { catchAsync } = require('../utils/AppErrors.js');
+const { catchAsync, AppError } = require('../utils/AppErrors.js');
 const userModel = require('./../models/userModel.js');
 const postModel = require('./../models/postModel.js');
 
@@ -24,7 +24,10 @@ const getData = async (req, res) => {
             return freshUser.followings.includes(val.username);
         }),
         posts: posts.filter((val) => {
-            return val.username === freshUser.username || freshUser.followings.includes(val.username);
+            return (
+                val.username === freshUser.username ||
+                freshUser.followings.includes(val.username)
+            );
         }),
     });
 };
@@ -58,6 +61,9 @@ exports.profile = catchAsync(async (req, res, next) => {
 });
 
 exports.connect = catchAsync(async (req, res, next) => {
+    if (!req.useragent.isMobile)
+        return next(new AppError('Page not found', 404));
+
     const data = await getData(req, res);
 
     data.title = 'Connect';
